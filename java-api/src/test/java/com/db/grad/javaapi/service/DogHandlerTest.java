@@ -33,6 +33,29 @@ public class DogHandlerTest {
 
         // assert
         assertEquals(expectedResult, actualResult);
+    }
 
+    @Test
+    public void add_several_dogs_return_number_of_dogs_match_number_added() {
+        // arrange
+        DogHandler cut = new DogHandler(itsDogRepo);
+
+        addDogToCut("Bruno", cut);
+        addDogToCut("Charlie", cut);
+        addDogToCut("Duke", cut);
+
+        int expectedResult = 3;
+
+        // act
+        long actualResult = cut.getNoOfDogs();
+
+        // assert
+        assertEquals(expectedResult, actualResult);
+    }
+
+    private static void addDogToCut(String Duke, DogHandler cut) {
+        Dog thirdDog = new Dog();
+        thirdDog.setName(Duke);
+        cut.addDog(thirdDog);
     }
 }
