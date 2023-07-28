@@ -49,5 +49,4 @@ public class DogHandler {
         }
         return  Optional.empty();
     }
-//            return (Dog) itsDogsRepo.findByName(DogName);
 }
