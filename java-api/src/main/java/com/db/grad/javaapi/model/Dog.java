@@ -10,7 +10,11 @@ public class Dog
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long dog_id;
+
+    public long getDog_id() {
+        return dog_id;
+    }
 
     private String name;
 
@@ -22,14 +26,6 @@ public class Dog
 
     public Integer getAge() {
         return age;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {
