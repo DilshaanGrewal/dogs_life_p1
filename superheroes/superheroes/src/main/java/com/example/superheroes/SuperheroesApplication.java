@@ -12,31 +12,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.List;
 
 @SpringBootApplication
-public class SuperheroesApplication implements CommandLineRunner {
+public class SuperheroesApplication {
 
-	@Autowired
-	HeroService heroService;
 	public static void main(String[] args) {
-
 		SpringApplication.run(SuperheroesApplication.class, args);
-	}
-	@Override
-	public void run(String... args) throws Exception {
-
-		List<Hero> heroes =  heroService.getHeroesStartingWithLetter("C");
-
-		for (Hero hero: heroes)
-			System.out.println(hero);
-
-		List<Hero> allHeroes =  heroService.getAllHeroes();
-
-		for (Hero hero: allHeroes)
-			System.out.println(hero);
-
-		List<Hero> heroesByName =  heroService.getLastThreeHeroesByName();
-
-		for (Hero hero: heroesByName)
-			System.out.println(hero);
-
 	}
 }
