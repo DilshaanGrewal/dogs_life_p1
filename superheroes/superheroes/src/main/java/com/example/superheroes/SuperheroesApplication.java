@@ -3,6 +3,7 @@ package com.example.superheroes;
 import com.example.superheroes.model.Hero;
 import com.example.superheroes.practice.Calculator;
 import com.example.superheroes.repository.HeroRepository;
+import com.example.superheroes.service.HeroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,7 +15,7 @@ import java.util.List;
 public class SuperheroesApplication implements CommandLineRunner {
 
 	@Autowired
-	HeroRepository heroRepository;
+	HeroService heroService;
 	public static void main(String[] args) {
 
 		SpringApplication.run(SuperheroesApplication.class, args);
@@ -22,15 +23,20 @@ public class SuperheroesApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		List<Hero> heroes = heroRepository.findHeroesNameStartingWithLetter("C%");
-		for(Hero hero:heroes){
-			System.out.println(hero);
-		}
+		List<Hero> heroes =  heroService.getHeroesStartingWithLetter("C");
 
-//		List<Hero> heroes2 = heroRepository.findTop3ByOrderByNameDesc();
-//		for(Hero hero:heroes2){
-//			System.out.println(hero);
-//		}
+		for (Hero hero: heroes)
+			System.out.println(hero);
+
+		List<Hero> allHeroes =  heroService.getAllHeroes();
+
+		for (Hero hero: allHeroes)
+			System.out.println(hero);
+
+		List<Hero> heroesByName =  heroService.getLastThreeHeroesByName();
+
+		for (Hero hero: heroesByName)
+			System.out.println(hero);
 
 	}
 }
