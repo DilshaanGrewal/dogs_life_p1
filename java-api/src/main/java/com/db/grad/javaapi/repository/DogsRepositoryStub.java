@@ -1,13 +1,13 @@
 package com.db.grad.javaapi.repository;
 
 import com.db.grad.javaapi.model.Dog;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
-public class DogsRepositoryStub implements DogsRepository {
+public class DogsRepositoryStub implements DogsRepository  {
     private ArrayList<Dog> itsDogs = new ArrayList<>();
 
     private long addDog(Dog theDog) {
@@ -44,8 +44,6 @@ public class DogsRepositoryStub implements DogsRepository {
     }
 
     @Override
-
-
     public long save(Dog aDog) {
         Dog retrievedDog = null;
         long result = -1;
