@@ -3,42 +3,59 @@ package com.db.grad.javaapi.controller;
 import com.db.grad.javaapi.model.Dog;
 import com.db.grad.javaapi.service.DogHandler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-@RestController
-public class WelcomeController {
+@RestController@RequestMapping("/api/v1")
+@CrossOrigin(origins = "http://localhost:3000")
+public class DogsController {
+  private DogHandler dogsService;
 
   @Autowired
-  DogHandler dogService;
-
-  @GetMapping("/")
-  public String getWelcome() {
-    return "Dogs API is up and running!";
+  public DogsController(DogHandler ds) {
+    dogsService = ds;
   }
 
-  @GetMapping("/count")
-  public long getCount(){
-    return dogService.getNoOfDogs();
+  @GetMapping("/dogs")
+  public List<Dog> getAllDogs() {
+    return dogsService.getAllDogs();
   }
 
-  @GetMapping("/all")
-  public List<Dog> printDogs(){
-    return dogService.getAll();
+  @GetMapping("/dogs/{id}")
+  public ResponseEntity<Dog> getEmployeeById(@PathVariable(value = "id") Long id)
+  {
+    Dog dogs = dogsService.getDogById(id);
+    return ResponseEntity.ok().body(dogs);
   }
 
-  @GetMapping("/findByName/{name}")
-  public Optional<Object> getDog(@PathVariable String name){
-    return dogService.getDogByName(name);
+  @PostMapping("/dogs")
+  public Dog createDog(@Valid @RequestBody Dog dog) {
+    return dogsService.addDog(dog);
   }
 
-  @GetMapping("/findById/{id}")
-  public Optional<Object> getDogById(@PathVariable long id){
-    return dogService.getDogByIdService(id);
-  }
+      @PutMapping("/dogs/{id}")
+      public ResponseEntity < Dog > updateDog(@PathVariable(value = "id") Long id,
+                                                      @Valid @RequestBody Dog dogDetails) throws ResourceNotFoundException {
 
+        final Dog updatedDogs = dogsService.updateDogDetails(dogDetails);
+        return ResponseEntity.ok(updatedDogs);
+      }
+
+          @DeleteMapping("/dogs/{id}")
+      public Map< String, Boolean > deleteDog(@PathVariable(value = "id") Long id) {
+            boolean removed = dogsService.removeDog(id);
+
+            Map<String, Boolean> response = new HashMap<>();
+            if (removed)
+              response.put("deleted", Boolean.TRUE);
+            else response.put("deleted", Boolean.FALSE);
+
+            return response;
+          }
 }

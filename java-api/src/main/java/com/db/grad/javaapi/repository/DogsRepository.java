@@ -13,8 +13,8 @@ import java.util.List;
 public interface DogsRepository extends JpaRepository<Dog , Integer> {
 
 
-    @Query(nativeQuery = true , value = " select name , age from dogs")
-        List<Dog> findByName(String dogName);
+    @Query(nativeQuery = true , value = " select * from dogs where name =: name")
+        List<Dog> findByName(Dog name);
 //    Dog  findById( long id );
 //    List<Dog> findByName(Dog theDog );
 //    boolean delete( Dog theDog );
