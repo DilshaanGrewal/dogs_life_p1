@@ -1,7 +1,7 @@
-import {hostNameUrl} from '../config/api';
 import axios from 'axios';
 
 export const getDogs = () => {
-    const dogs = axios.get('/dogs');
+    const hostNameUrl = "http://localhost:8080/api/v1"
+    const dogs = axios.get(`${hostNameUrl}/dogs`);
     return dogs
 }
