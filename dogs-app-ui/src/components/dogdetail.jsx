@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 
 const DogDetail = (props) => {
-    const[counter, setCounter] = useState(0);
+
 
   return (
     <Card>
