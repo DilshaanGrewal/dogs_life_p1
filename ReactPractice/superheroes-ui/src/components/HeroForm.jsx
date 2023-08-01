@@ -3,6 +3,8 @@ import Form from 'react-bootstrap/Form'
 import Row from "react-bootstrap/Row";
 import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/esm/Button';
+import { saveHero } from '../services/hero-service';
+import { useNavigate } from 'react-router-dom';
 
 const HeroForm = () => {
     const [alias, setAlias] = useState('');
@@ -26,6 +28,8 @@ const HeroForm = () => {
         setTeamID(event.target.value)
     }
 
+    const navigate = useNavigate();
+
     const handleSubmit =(event)=>{
         event.preventDefault();
         let hero = {};
@@ -33,8 +37,20 @@ const HeroForm = () => {
         hero.name = name;
         hero.ability = ability;
         hero.teamID = teamID;
-        console.log(hero);
-      }
+        saveHero(hero)
+          .then(res => {
+             setAbility('');
+             setAlias('');
+             setName('');
+             setTeamID(0);
+             navigate("/")
+             })
+           .catch(err=>{
+              console.log(err);
+             })   
+       }
+
+    
 
     return (
         <Container>
