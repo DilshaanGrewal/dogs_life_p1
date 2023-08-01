@@ -1,15 +1,28 @@
 import React from 'react'
 import DogDetail from './dogdetail'
+import { useState, useEffect } from 'react';
+import { getAllDogs } from '../services/dog-service'
 
 const AllDogs = () => {
-    const dogs = [
-        {"dog_id":1, "name": "Einstein", "age": 3},
-        {"dog_id":2, "name": "Kaya", "age": 5},
-        {"dog_id":3, "name": "Lassie", "age": 7},
-    ]
+  const [dogs,setDogs] = useState([]);
+  useEffect(()=>{
+    getDogsFromAPI();}, 
+    []
+  );
+  const getDogsFromAPI = ()=>{}
+
+  getAllDogs()
+    .then(res => {
+      setDogs(res.data);
+    })
+    .catch(err => {
+      setDogs([]);
+      console.log(err);
+  })
+  
   return (
     dogs.map(dog=>(
-        <DogDetail info={dog} key={dog.dog_id.toString()} />
+        <DogDetail info={dog} key={dog.dog_id} />
     ))
   )
 }
