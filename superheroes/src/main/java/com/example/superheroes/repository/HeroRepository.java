@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface HeroRepository extends JpaRepository<Hero , Integer> {
-    @Query(nativeQuery = true , value = "select * from heroes order by name desc limit 3 " )
+public interface HeroRepository extends JpaRepository<Hero, Integer> {
     List<Hero> findTop3ByOrderByNameDesc();
-    @Query(nativeQuery = true,value = "select * from heroes where name like :letter")
+
+    @Query(nativeQuery = true, value = "select * from heroes where name like :letter")
     List<Hero> findHeroesNameStartingWithLetter(String letter);
 }

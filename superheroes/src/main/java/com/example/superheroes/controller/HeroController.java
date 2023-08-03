@@ -4,10 +4,7 @@ import com.example.superheroes.model.Hero;
 import com.example.superheroes.service.HeroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,10 +27,12 @@ public class HeroController {
     @PostMapping("/heroes")
     public HttpStatus saveNewHero(Hero hero){
         Hero result = heroService.saveHero(hero);
-
-        if(result == null)
+        if (result == null){
             return HttpStatus.PRECONDITION_FAILED;
-        return HttpStatus.CREATED;
+        } else {
+            return HttpStatus.CREATED;
+        }
     }
+
 
 }

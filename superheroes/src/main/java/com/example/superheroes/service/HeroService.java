@@ -15,7 +15,6 @@ public class HeroService {
 
     public List<Hero> getHeroesStartingWithLetter(String letter){
         String letterParam = letter + "%";
-
         List<Hero> heroes = heroRepository.findHeroesNameStartingWithLetter(letterParam);
         return heroes;
     }
@@ -31,6 +30,5 @@ public class HeroService {
     public Hero saveHero(Hero hero){
         return heroRepository.save(hero);
     }
-
 
 }
